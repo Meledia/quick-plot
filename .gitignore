@@ -1,3 +1,7 @@
 # Node modules from NPM
 # Restore with `npm install`
 node_modules/
+
+# Transpiled build files
+# Generate new build with `npm run build`
+dist/

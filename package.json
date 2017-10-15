@@ -4,6 +4,9 @@
   "description": "Effortlessly create beautiful and meaningful visualizations of your data, leaving you more time to go out and acquire it.",
   "main": "dist/index.js",
   "scripts": {
+    "build": "gulp build",
+    "lint": "gulp lint",
+    "watch": "gulp watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +19,10 @@
     "eslint-plugin-import": "^2.7.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
+    "gulp-eslint": "^4.0.0",
     "gulp-sourcemaps": "^2.6.1"
+  },
+  "dependencies": {
+    "canvas-prebuilt": "^1.6.5-prerelease.1"
   }
 }
