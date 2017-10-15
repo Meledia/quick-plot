@@ -12,6 +12,8 @@ Just use [NPM](https://www.npmjs.com) to install quick-plot as a dependency in y
 
 This project is still in its infancy, so no exposed API yet! Check out the [roadmap](#roadmap) to get an idea of when the first API methods will be exposed and what they'll be.
 
+🚧 **All of the below sections will be completed soon! Thanks for bearing with us while we get off the ground!** 🚧
+
 ## Motivation
 
 ## Contributing
