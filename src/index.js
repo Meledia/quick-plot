@@ -1,19 +1,19 @@
-const Canvas = require('canvas-prebuilt');
+import PlotArea from './lib/PlotArea';
+import DataList from './lib/containers/DataList';
+import DataSet from './lib/containers/DataSet';
 
-const canvas = new Canvas(1000, 1000);
-const ctx = canvas.getContext('2d');
+const list1 = new DataList([5, 24, 12, 37, 9]);
+const list2 = new DataList([6, 10, 33, 12, 11]);
 
-exports.getImage = () => {
-  ctx.font = '30px Arial';
-  ctx.rotate(0.1);
-  ctx.fillText('Awesome!', 50, 100);
+const ds = new DataSet();
+ds.push(list1);
+ds.push(list2);
 
-  const te = ctx.measureText('Awesome!');
-  ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-  ctx.beginPath();
-  ctx.lineTo(50, 102);
-  ctx.lineTo(50 + te.width, 102);
-  ctx.stroke();
+const myArea = new PlotArea({
+  width: 1000,
+  height: 1000,
+});
 
-  return `<img src="${canvas.toDataURL()}" />`;
-};
+myArea.drawBars();
+
+exports.getImage = () => myArea.getDataUri();

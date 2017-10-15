@@ -14,7 +14,7 @@ type plotAreaOptions = {
 
 export default class PlotArea {
   size: plotSize;
-  surface: Object;
+  surface: Canvas;
 
   constructor(options: plotAreaOptions) {
     // Default to an empty object if no options specified
@@ -28,5 +28,16 @@ export default class PlotArea {
 
     // Save the drawing surface to class instance
     this.surface = new Canvas(this.size.width, this.size.height);
+  }
+
+  drawBars() {
+    const drawingCtx = this.surface.getContext('2d');
+    drawingCtx.fillStyle = 'green';
+    drawingCtx.fillRect(this.size.width / 2, 0, this.size.width / 10, this.size.height / 10);
+    return drawingCtx;
+  }
+
+  getDataUri() {
+    return this.surface.toDataURL();
   }
 }
