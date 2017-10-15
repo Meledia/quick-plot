@@ -1,7 +1,8 @@
 {
   "name": "quick-plot",
   "version": "0.1.0",
-  "description": "Effortlessly create beautiful and meaningful visualizations of your data, leaving you more time to go out and acquire it.",
+  "description":
+    "Dead simple server-side rendering for data visualizations with no system dependencies.",
   "main": "dist/index.js",
   "scripts": {
     "build": "gulp build",
@@ -10,7 +11,24 @@
     "flow": "flow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cgatno/quick-plot"
+  },
+  "keywords": [
+    "server rendering",
+    "canvas",
+    "data viz",
+    "data visualization",
+    "data",
+    "plotting",
+    "graph"
+  ],
+  "author": {
+    "name": "Christian Gaetano",
+    "email": "hello@christiangaetano.com",
+    "url": "http://christiangaetano.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
