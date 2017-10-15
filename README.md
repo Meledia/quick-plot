@@ -1,6 +1,6 @@
 # quick-plot ⚡📈
 
-Dead simple server-side data visualization with no system dependencies.
+Dead simple server-side rendering for data visualizations with no system dependencies.
 
 ## Getting Started
 
