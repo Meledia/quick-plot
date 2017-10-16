@@ -1,8 +1,8 @@
 {
   "name": "quick-plot",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description":
-    "Dead simple server-side rendering for data visualizations with no system dependencies.",
+    "Dead simple server-side rendering for data visualizations with no system dependencies. ⚡📈",
   "main": "dist/index.js",
   "scripts": {
     "build": "gulp build",
