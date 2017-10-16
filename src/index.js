@@ -1,19 +1,26 @@
-import PlotArea from './lib/PlotArea';
+import PlotArea, { PlotAreaOptions } from './lib/PlotArea';
 import DataList from './lib/containers/DataList';
 import DataSet from './lib/containers/DataSet';
 
-const list1 = new DataList([5, 24, 12, 37, 9]);
-const list2 = new DataList([6, 10, 33, 12, 11]);
+export const BarGraph = async (
+  opts: PlotAreaOptions,
+  xVals: Array<number> = [],
+  yVals: Array<number> = [],
+) => {
+  const barPlot = new PlotArea(opts);
+  const xs = new DataList(xVals);
+  const ys = new DataList(yVals);
+  const barSet = new DataSet();
+  barSet.push(xs);
+  barSet.push(ys);
 
-const ds = new DataSet();
-ds.push(list1);
-ds.push(list2);
+  const success = await barPlot.plotBars(barSet);
+  if (success) {
+    return barPlot.getDataUri();
+  }
+  throw new Error("Couldn't plot data as a bar graph.");
+};
 
-const myArea = new PlotArea({
-  width: 1000,
-  height: 1000,
-});
-
-myArea.drawBars();
-
-exports.getImage = () => myArea.getDataUri();
+export const LineGraph = () => {
+  const linePlot = new PlotArea();
+};

@@ -1,13 +1,14 @@
 // @flow
 
 import Canvas from 'canvas-prebuilt';
+import DataSet from './containers/DataSet';
 
 type plotSize = {
   width: number,
   height: number,
 };
 
-type plotAreaOptions = {
+export type PlotAreaOptions = {
   width: ?number,
   height: ?number,
 };
@@ -16,9 +17,9 @@ export default class PlotArea {
   size: plotSize;
   surface: Canvas;
 
-  constructor(options: plotAreaOptions) {
+  constructor(options: PlotAreaOptions) {
     // Default to an empty object if no options specified
-    const passedOpts: plotAreaOptions = options || {};
+    const passedOpts: PlotAreaOptions = options || {};
 
     // Store some options in this instance for calculations later on
     this.size = {
@@ -30,14 +31,33 @@ export default class PlotArea {
     this.surface = new Canvas(this.size.width, this.size.height);
   }
 
-  drawBars() {
-    const drawingCtx = this.surface.getContext('2d');
-    drawingCtx.fillStyle = 'green';
-    drawingCtx.fillRect(this.size.width / 2, 0, this.size.width / 10, this.size.height / 10);
-    return drawingCtx;
+  plotBars(inputData: DataSet): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      console.log(this.size);
+      if (!inputData) {
+        return reject(new Error('No values given!'));
+      }
+      return setTimeout(() => resolve(true), 1000);
+    });
   }
 
-  getDataUri() {
-    return this.surface.toDataURL();
+  /**
+   * Export the drawing surface as a data URL that can be converted to binary format or displayed
+   * directly in a HTML <img> tag.
+   *
+   * @returns {Promise<string>} A Promise that resolves with the data URL for the image since
+   * encoding more complex plots may take some time.
+   * @memberof PlotArea
+   */
+  getDataUri(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.surface.toDataURL('image/png', (err: Error, png: string) => {
+        if (err) {
+          return reject(err.message);
+        }
+
+        return resolve(png);
+      });
+    });
   }
 }
