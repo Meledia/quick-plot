@@ -75,6 +75,10 @@ export default class SVG {
       const fill = inputData.style.fill || '#232323';
       const stroke = inputData.style.stroke || '#232323';
       const strokeWidth = inputData.style.strokeWidth || 0;
+
+      circle.item = {
+        cx, cy, r, fill, stroke, strokeWidth,
+      };
       circle.elem = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" />`;
       circle.svg = this.wrapper.open + circle.elem + this.wrapper.close;
       return resolve(circle);
@@ -96,6 +100,10 @@ export default class SVG {
       const fill = inputData.style.fill || '#232323';
       const stroke = inputData.style.stroke || '#232323';
       const strokeWidth = inputData.style.strokeWidth || 0;
+
+      rect.item = {
+        width, height, x, y, rx, ry, fill, stroke, strokeWidth,
+      };
       rect.elem = `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${rx}" ry="${ry} fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" />`;
       rect.svg = this.wrapper.open + rect.elem + this.wrapper.close;
       return resolve(rect);
