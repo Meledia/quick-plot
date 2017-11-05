@@ -5,3 +5,6 @@ node_modules/
 # Transpiled build files
 # Generate new build with `npm run build`
 dist/
+
+# Local testing files
+*-local.js
