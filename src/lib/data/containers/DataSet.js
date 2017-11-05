@@ -26,8 +26,9 @@ export default class DataSet {
   push(newList: Array<number> | DataList) {
     if (newList instanceof DataList) {
       return this.set.push(newList);
+    } else if (newList instanceof Array) {
+      return this.set.push(new DataList(newList));
     }
-
-    return this.set.push(new DataList(newList));
+    return this.set.push(new DataList());
   }
 }
