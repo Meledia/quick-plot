@@ -1,7 +1,7 @@
 // @flow
 
 import Canvas from 'canvas-prebuilt';
-import DataSet from './containers/DataSet';
+import DataSet from './data/containers/DataSet';
 
 type plotSize = {
   width: number,

@@ -14,21 +14,21 @@ type svgStyle = {
   fill: string,
   stroke: string,
   strokeWidth: number,
-}
+};
 
 type svgWrapper = {
   open: string,
   close: string,
-}
+};
 
 type circleData = {
   radius: number,
   cx: number,
   cy: number,
   style: svgStyle,
-}
+};
 
-export default class SVG {
+export class SVG {
   size: svgSize;
   ns: svgNs;
   wrapper: svgWrapper;
@@ -47,24 +47,25 @@ export default class SVG {
     };
 
     this.wrapper = {
-      open: `<svg xmlns="${this.ns.xmlns}" xmlns:svg="${this.ns.ns}" height="${this.size.height}" width="${this.size.width}">`,
+      open: `<svg xmlns="${this.ns.xmlns}" xmlns:svg="${this.ns.ns}" height="${this.size
+        .height}" width="${this.size.width}">`,
       close: '</svg>',
     };
   }
 }
 
-
 export class Circle extends SVG {
   constructor() {
     super();
     this.svg = {};
-    this.svg.viewBox = `${this.viewBox.minx} ${this.viewBox.miny} ${this.viewBox.width} ${this.viewBox.height}`;
+    this.svg.viewBox = `${this.viewBox.minx} ${this.viewBox.miny} ${this.viewBox.width} ${this
+      .viewBox.height}`;
     this.svg.ns = this.ns.xmlns;
     this.svg.ns = this.ns.ns;
     this.svg.width = this.size.width;
     this.svg.height = this.size.height;
   }
-  default(options : circleData) {
+  default(options: circleData) {
     return new Promise((resolve, reject) => {
       if (!options) {
         return reject(new Error('No values given!'));
