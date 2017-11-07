@@ -1,83 +1,78 @@
 // @flow
 
-type svgSize = {
+// Reuseable types for all SVG
+type SVGSize = {
   width: number,
-  height: number,
+  height?: number,
 };
 
-type svgNs = {
-  xmlns: string,
-  ns: string,
-};
-
-type svgStyle = {
+type SVGStyle = {
   fill: string,
   stroke: string,
   strokeWidth: number,
 };
 
-type svgWrapper = {
-  open: string,
-  close: string,
-};
-
-type circleData = {
-  radius: number,
-  cx: number,
-  cy: number,
-  style: svgStyle,
+type SVGPosition = {
+  horizontal: number,
+  vertical: number,
 };
 
 export class SVG {
-  size: svgSize;
-  ns: svgNs;
-  wrapper: svgWrapper;
-  constructor(options) {
-    const passedOpts = options || {};
-    this.viewBox = {
-      minx: passedOpts.minx || 0,
-      miny: passedOpts.miny || 0,
-      width: passedOpts.width || 100,
-      height: passedOpts.height || passedOpts.width || 100, // default to a 250 x 250 square
-    };
+  size: SVGSize;
+  tag: string;
 
-    this.ns = {
-      xmlns: passedOpts.xmlns || 'http://www.w3.org/2000/xmlns/',
-      ns: passedOpts.ns || 'http://www.w3.org/2000/svg',
-    };
+  constructor(size?: SVGSize) {
+    this.tag = 'svg'; // default HTML tag for SVG
 
-    this.wrapper = {
-      open: `<svg xmlns="${this.ns.xmlns}" xmlns:svg="${this.ns.ns}" height="${this.size
-        .height}" width="${this.size.width}">`,
-      close: '</svg>',
+    this.size = size || {
+      width: 25, // default to 25x25 square
     };
+  }
+
+  getElementAttributes() {
+    return `    width="${this.size.width}"\r\n    height="${this.size.height || this.size.width}"`;
+  }
+
+  toString(): string {
+    return `<${this.tag}\r\n${this.getElementAttributes()}\r\n  />`;
   }
 }
 
+// Circle-specific SVG types
+
+type CircleInitOptions = {
+  radius?: number,
+  position?: SVGPosition,
+  style?: SVGStyle,
+};
+
 export class Circle extends SVG {
-  constructor() {
-    super();
-    this.svg = {};
-    this.svg.viewBox = `${this.viewBox.minx} ${this.viewBox.miny} ${this.viewBox.width} ${this
-      .viewBox.height}`;
-    this.svg.ns = this.ns.xmlns;
-    this.svg.ns = this.ns.ns;
-    this.svg.width = this.size.width;
-    this.svg.height = this.size.height;
+  position: SVGPosition;
+  style: ?SVGStyle;
+
+  constructor(options?: CircleInitOptions) {
+    const passedOpts = options || {};
+
+    // Call SVG constructor with size if provided - simply set the size width to the desired radius
+    super(passedOpts.radius ? { width: passedOpts.radius } : { width: 50 });
+
+    // Default to centering on a 100x100 viewBox
+    this.position = passedOpts.position || {
+      horizontal: 50,
+      vertical: 50,
+    };
+
+    // Pass along any style attributes, defined or not
+    this.style = passedOpts.style;
+
+    // Set the tag for a circle
+    this.tag = 'circle';
   }
-  default(options: circleData) {
-    return new Promise((resolve, reject) => {
-      if (!options) {
-        return reject(new Error('No values given!'));
-      }
-      this.svg.circle = {};
-      this.svg.circle.cx = options.cx || 0;
-      this.svg.circle.cy = options.cy || 0;
-      this.svg.circle.r = options.radius || 50;
-      this.svg.circle.stroke = options.style.stroke || '#232323';
-      this.svg.circle.strokeWidth = options.style.strokeWidth || 2;
-      this.svg.circle.fill = options.style.fill || '';
-      return resolve(this.svg);
-    });
+
+  getElementAttributes() {
+    return `    cx="${this.position.horizontal}"\r\n    cy="${this.position
+      .vertical}"\r\n    r="${this.size.width}"`;
+
+    // TODO: Add style attributes if defined
   }
 }
